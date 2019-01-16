@@ -40,6 +40,6 @@ RUN wget --no-check-certificate https://raw.githubusercontent.com/directus/api/m
 RUN composer require league/flysystem-aws-s3-v3
 ```
 
-# CDN
+## CDN Module
 
 Currently, the CloudFront and S3 setup leaves some work to be desired, as it does not allow dynamic specification of regions. Until Terraform adds for-loops, we cannot easily do this, so I am waiting to refactor this until then.
