@@ -1,6 +1,6 @@
 # directus-terraform
 
-<img src="https://raw.githubusercontent.com/sightsoundtheatres/directus-terraform/assets/directus.png" height="60" alt="Directus Badge"> <img src="https://raw.githubusercontent.com/sightsoundtheatres/directus-terraform/assets/terraform.svg" height="60" alt="Terraform Badge">
+<img src="https://raw.githubusercontent.com/sightsoundtheatres/directus-terraform/master/assets/directus.png" height="60" alt="Directus Badge"> <img src="https://raw.githubusercontent.com/sightsoundtheatres/directus-terraform/master/assets/terraform.svg" height="60" alt="Terraform Badge">
 
 This repository contains the Terraform modules used by [Sight & Sound Theatres](https://sight-sound.com) to deploy Directus 7 into AWS ECS (Fargate), RDS (Aurora), S3, CloudFront, and Route 53. These modules are configured to deploy into two regions, us-east-1 and us-west-2 by default. More regions may be easily added by modifying `main.tf`.
 
