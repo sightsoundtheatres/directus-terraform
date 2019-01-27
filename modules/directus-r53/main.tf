@@ -65,7 +65,7 @@ resource "aws_route53_health_check" "api" {
   port              = 443
   type              = "HTTPS"
   resource_path     = "/server/ping"
-  failure_threshold = 3
+  failure_threshold = 1
   request_interval  = 10
   measure_latency   = true
 
