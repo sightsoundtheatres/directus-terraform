@@ -93,7 +93,7 @@ resource "aws_rds_cluster" "main" {
   backup_retention_period = 7
   preferred_backup_window = "07:00-07:30"
 
-  deletion_protection = false
+  deletion_protection = true
   apply_immediately   = true
   skip_final_snapshot = true
 

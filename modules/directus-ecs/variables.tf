@@ -26,14 +26,6 @@ variable "s3_bucket_name" {
   description = "The S3 bucket name for Directus to use."
 }
 
-variable "s3_user_key" {
-  description = "The key of the AWS user used to access S3."
-}
-
-variable "s3_user_secret" {
-  description = "The secret of the AWS user used to access S3."
-}
-
 variable "task_count" {
   description = "The desired number of tasks to run in the service."
 }

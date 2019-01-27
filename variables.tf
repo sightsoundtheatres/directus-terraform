@@ -24,7 +24,7 @@ variable "r53_cdn_subdomain" {
 
 variable "api_docker_image" {
   description = "The Docker image to deploy to ECS. This will need to be customized for use of S3 or other adapters."
-  default     = "directus/api:2.0.14"
+  default     = "directus/api:2.0.15"
 }
 
 variable "db_name" {
@@ -37,12 +37,4 @@ variable "db_username" {
 
 variable "db_password" {
   description = "The master password for the Aurora database."
-}
-
-variable "s3_user_key" {
-  description = "The key of the AWS user used to access S3."
-}
-
-variable "s3_user_secret" {
-  description = "The secret of the AWS user used to access S3."
 }

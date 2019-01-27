@@ -30,15 +30,14 @@ When running `terraform init` you must specify information about the S3 bucket t
 
 ## Docker
 
-We use the following Dockerfile to set up S3 integration into Directus. If you wish to use it, you must build and push it to a repository and change the `api_docker_image` variable in the `terraform.tfvars` file. Substitute `2.0.14` with the version of the Directus parent Docker image you'd like to use.
+We use the following Dockerfile to set up S3 integration into Directus. If you wish to use it, you must build and push it to a repository and change the `api_docker_image` variable in the `terraform.tfvars` file. Substitute `2.0.15` with the version of the Directus parent Docker image you'd like to use.
 
 ```
-FROM directus/api:2.0.14
+FROM directus/api:2.0.15
 
 WORKDIR /var/www/html
 
 RUN apk --no-cache add wget composer git php7-xmlwriter php7-tokenizer php7-simplexml
-RUN wget --no-check-certificate https://raw.githubusercontent.com/directus/api/master/composer.json
 RUN composer require league/flysystem-aws-s3-v3
 ```
 

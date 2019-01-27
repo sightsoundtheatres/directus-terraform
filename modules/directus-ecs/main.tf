@@ -138,10 +138,8 @@ resource "aws_ecs_task_definition" "main" {
       {"name": "STORAGE_ROOT", "value": "www/uploads/"},
       {"name": "STORAGE_ROOT_URL", "value": "https://${var.cdn_domain_name}/www/uploads"},
       {"name": "STORAGE_THUMB_URL", "value": "www/thumbs/"},
-      {"name": "STORAGE_KEY", "value": "${var.s3_user_key}"},
-      {"name": "STORAGE_SECRET", "value": "${var.s3_user_secret}"},
       {"name": "STORAGE_REGION", "value": "${var.aws_region}"},
-      {"name": "STORAGE_BUCKET", "value": "${data.aws_s3_bucket.main.id}"},
+      {"name": "STORAGE_BUCKET", "value": "${var.s3_bucket_name}"},
       {"name": "ADMIN_EMAIL", "value": "admin@example.com"}
     ],
     "logConfiguration": {

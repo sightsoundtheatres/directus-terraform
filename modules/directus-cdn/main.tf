@@ -99,7 +99,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "S3-${var.r53_subdomain}-us-east-1.${replace(data.aws_route53_zone.main.name, "/[.]$/", "")}" //"OriginGroup-S3-${var.r53_subdomain}.${replace(data.aws_route53_zone.main.name, "/[.]$/", "")}" // Terraform does not support Origin Groups as of AWS provider v1.53.0, so this was changed after initial creation
+    target_origin_id = "OriginGroup-S3-${var.r53_subdomain}.${replace(data.aws_route53_zone.main.name, "/[.]$/", "")}" // Terraform does not support Origin Groups as of AWS provider v1.53.0, so this was changed after initial creation
 
     forwarded_values {
       query_string = true

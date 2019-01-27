@@ -54,11 +54,3 @@ variable "cdn_bucket_name" {
 variable "cdn_domain_name" {
   description = "The domain name of the CDN CloudFront distribution."
 }
-
-variable "s3_user_key" {
-  description = "The key of the AWS user used to access S3."
-}
-
-variable "s3_user_secret" {
-  description = "The secret of the AWS user used to access S3."
-}

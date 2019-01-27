@@ -52,8 +52,6 @@ module "api-us-east-1" {
   r53_subdomain   = "${var.r53_api_subdomain}"
   cdn_bucket_name = "${module.directus-cdn.us-east-1_bucket_name}"
   cdn_domain_name = "${local.cdn_domain_name}"
-  s3_user_key     = "${var.s3_user_key}"
-  s3_user_secret  = "${var.s3_user_secret}"
 }
 
 module "api-us-west-2" {
@@ -72,8 +70,6 @@ module "api-us-west-2" {
   r53_subdomain   = "${var.r53_api_subdomain}"
   cdn_bucket_name = "${module.directus-cdn.us-west-2_bucket_name}"
   cdn_domain_name = "${local.cdn_domain_name}"
-  s3_user_key     = "${var.s3_user_key}"
-  s3_user_secret  = "${var.s3_user_secret}"
 
   db_replication_source_cluster_arn = "${module.api-us-east-1.db_cluster_arn}"
 }
@@ -86,7 +82,7 @@ module "directus-cdn" {
 
   prefix        = "${var.prefix}"
   r53_zone_id   = "${var.r53_zone_id}"
-  r53_subdomain = "cdn-test"
+  r53_subdomain = "${var.r53_cdn_subdomain}"
 }
 
 # Route 53 Latency-Based Routing Records for Directus API

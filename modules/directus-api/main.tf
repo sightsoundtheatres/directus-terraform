@@ -35,8 +35,6 @@ module "ecs" {
   task_count      = "${var.task_count}"
   docker_image    = "${var.docker_image}"
   s3_bucket_name  = "${var.cdn_bucket_name}"
-  s3_user_key     = "${var.s3_user_key}"
-  s3_user_secret  = "${var.s3_user_secret}"
   db_endpoint     = "${module.db.cluster_endpoint}"
   db_name         = "${var.db_name}"
   db_username     = "${var.db_username}"
