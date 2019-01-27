@@ -83,6 +83,7 @@ module "directus-cdn" {
   prefix        = "${var.prefix}"
   r53_zone_id   = "${var.r53_zone_id}"
   r53_subdomain = "${var.r53_cdn_subdomain}"
+  cors_origins  = "${var.cdn_cors_origins}"
 }
 
 # Route 53 Latency-Based Routing Records for Directus API

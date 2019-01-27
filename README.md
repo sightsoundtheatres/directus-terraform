@@ -24,6 +24,11 @@ api_docker_image = "directus/api:2.0.14"
 db_name     = "directus"
 db_username = "user"
 db_password = "password"
+
+cdn_cors_origins = [
+  "https://example.com",
+  "https://*.example.com"
+]
 ```
 
 When running `terraform init` you must specify information about the S3 bucket to store state in, or you may modify `main.tf` to include this information.

@@ -45,6 +45,13 @@ resource "aws_s3_bucket" "cdn-us-east-1" {
 
   policy = "${data.aws_iam_policy_document.cdn-us-east-1-bucket-policy.json}"
 
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET"]
+    allowed_origins = ["${var.cors_origins}"]
+    max_age_seconds = 3000
+  }
+
   tags = {
     Environment = "CMS"
   }

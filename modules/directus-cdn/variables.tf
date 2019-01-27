@@ -9,3 +9,8 @@ variable "r53_zone_id" {
 variable "r53_subdomain" {
   description = "The subdomain to create in Route 53 for the CDN."
 }
+
+variable "cors_origins" {
+  description = "The origins to allow CDN resources to be loaded from."
+  type = "list"
+}

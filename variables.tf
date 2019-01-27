@@ -38,3 +38,8 @@ variable "db_username" {
 variable "db_password" {
   description = "The master password for the Aurora database."
 }
+
+variable "cdn_cors_origins" {
+  description = "The origins to allow CDN resources to be loaded from."
+  type = "list"
+}
