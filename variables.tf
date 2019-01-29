@@ -1,5 +1,5 @@
 variable "cidr" {
-  description = "The overall CIDR used between all regions. Must be a /24."
+  description = "The overall CIDR used between all regions. Must be a /16."
 }
 
 variable "prefix" {
