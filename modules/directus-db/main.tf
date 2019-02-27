@@ -126,7 +126,7 @@ resource "aws_rds_cluster_instance" "main" {
   engine             = "aurora-mysql"
   identifier         = "${lower(var.prefix)}-${var.aws_region}-${format("%02d", count.index + 1)}"
   cluster_identifier = "${aws_rds_cluster.main.id}"
-  instance_class     = "db.t2.small"
+  instance_class     = "db.t3.small"
 
   tags {
     Environment = "CMS"
