@@ -10,8 +10,12 @@ variable "vpc_cidr" {
   description = "The CIDR to assign to the VPC. Must be a /21."
 }
 
-variable "task_count" {
-  description = "The number of ECS tasks to start."
+variable "min_task_count" {
+  description = "The minimum number of ECS tasks to start."
+}
+
+variable "max_task_count" {
+  description = "The maximum number of ECS tasks to start."
 }
 
 variable "docker_image" {

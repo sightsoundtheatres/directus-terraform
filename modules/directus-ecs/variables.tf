@@ -26,8 +26,12 @@ variable "s3_bucket_name" {
   description = "The S3 bucket name for Directus to use."
 }
 
-variable "task_count" {
-  description = "The desired number of tasks to run in the service."
+variable "min_task_count" {
+  description = "The minimum desired number of tasks to run in the service."
+}
+
+variable "max_task_count" {
+  description = "The maximum desired number of tasks to run in the service."
 }
 
 variable "db_endpoint" {

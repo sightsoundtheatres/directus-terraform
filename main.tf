@@ -42,7 +42,8 @@ module "api-us-east-1" {
   aws_region      = "us-east-1"
   prefix          = "${var.prefix}"
   vpc_cidr        = "${cidrsubnet(var.cidr, 5, 0)}"
-  task_count      = 2
+  min_task_count  = 2
+  max_task_count  = 5
   docker_image    = "${var.api_docker_image}"
   db_name         = "${var.db_name}"
   db_username     = "${var.db_username}"
@@ -60,7 +61,8 @@ module "api-us-west-2" {
   aws_region      = "us-west-2"
   prefix          = "${var.prefix}"
   vpc_cidr        = "${cidrsubnet(var.cidr, 5, 1)}"
-  task_count      = 1
+  min_task_count  = 1
+  max_task_count  = 3
   docker_image    = "${var.api_docker_image}"
   db_name         = "${var.db_name}"
   db_username     = "${var.db_username}"

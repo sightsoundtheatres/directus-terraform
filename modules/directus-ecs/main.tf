@@ -90,7 +90,7 @@ resource "aws_ecs_service" "main" {
   name            = "${var.prefix}-${var.aws_region}-DirectusAPI"
   cluster         = "${aws_ecs_cluster.main.id}"
   task_definition = "${aws_ecs_task_definition.main.arn}"
-  desired_count   = "${var.task_count}"
+  desired_count   = "${var.min_task_count}"
   launch_type     = "FARGATE"
 
   network_configuration {
@@ -200,4 +200,90 @@ data "aws_iam_policy_document" "ecs_assume_role" {
 resource "aws_cloudwatch_log_group" "main" {
   name              = "/${lower(var.prefix)}/${var.aws_region}-DirectusAPI"
   retention_in_days = "14"
+}
+
+# Auto Scaling Groups
+
+resource "aws_appautoscaling_target" "main" {
+  service_namespace  = "ecs"
+  resource_id        = "service/${aws_ecs_cluster.main.name}/${aws_ecs_service.main.name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  min_capacity       = "${var.min_task_count}"
+  max_capacity       = "${var.max_task_count}"
+}
+
+resource "aws_appautoscaling_policy" "up" {
+  name               = "${var.prefix}-${var.aws_region}-DirectusAPI-ScaleUp"
+  service_namespace  = "ecs"
+  resource_id        = "service/${aws_ecs_cluster.main.name}/${aws_ecs_service.main.name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+
+  step_scaling_policy_configuration {
+    adjustment_type         = "ChangeInCapacity"
+    cooldown                = 200
+    metric_aggregation_type = "Maximum"
+
+    step_adjustment {
+      metric_interval_lower_bound = 0
+      scaling_adjustment          = 1
+    }
+  }
+
+  depends_on = ["aws_appautoscaling_target.main"]
+}
+
+resource "aws_appautoscaling_policy" "down" {
+  name               = "${var.prefix}-${var.aws_region}-DirectusAPI-ScaleDown"
+  service_namespace  = "ecs"
+  resource_id        = "service/${aws_ecs_cluster.main.name}/${aws_ecs_service.main.name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+
+  step_scaling_policy_configuration {
+    adjustment_type         = "ChangeInCapacity"
+    cooldown                = 200
+    metric_aggregation_type = "Maximum"
+
+    step_adjustment {
+      metric_interval_lower_bound = 0
+      scaling_adjustment          = -1
+    }
+  }
+
+  depends_on = ["aws_appautoscaling_target.main"]
+}
+
+resource "aws_cloudwatch_metric_alarm" "service_cpu_high" {
+  alarm_name          = "${var.prefix}-${var.aws_region}-HighCPU"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = "2"
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/ECS"
+  period              = "60"
+  statistic           = "Average"
+  threshold           = "65"
+
+  dimensions {
+    ClusterName = "${aws_ecs_cluster.main.name}"
+    ServiceName = "${aws_ecs_service.main.name}"
+  }
+
+  alarm_actions = ["${aws_appautoscaling_policy.up.arn}"]
+}
+
+resource "aws_cloudwatch_metric_alarm" "service_cpu_low" {
+  alarm_name          = "${var.prefix}-${var.aws_region}-LowCPU"
+  comparison_operator = "LessThanOrEqualToThreshold"
+  evaluation_periods  = "2"
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/ECS"
+  period              = "60"
+  statistic           = "Average"
+  threshold           = "40"
+
+  dimensions {
+    ClusterName = "${aws_ecs_cluster.main.name}"
+    ServiceName = "${aws_ecs_service.main.name}"
+  }
+
+  alarm_actions = ["${aws_appautoscaling_policy.down.arn}"]
 }

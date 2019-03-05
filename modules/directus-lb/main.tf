@@ -114,11 +114,11 @@ resource "aws_lb_target_group" "main" {
   target_type = "ip"
 
   health_check {
-    interval            = 10
+    interval            = 30
     path                = "/server/ping"
-    timeout             = 3
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
+    timeout             = 10
+    healthy_threshold   = 3
+    unhealthy_threshold = 3
     matcher             = "200"
   }
 
