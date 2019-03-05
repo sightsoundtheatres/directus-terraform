@@ -112,8 +112,8 @@ resource "aws_ecs_task_definition" "main" {
   family                   = "${var.prefix}-${var.aws_region}-DirectusAPI-TD"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  cpu                      = "256"
-  memory                   = "512"
+  cpu                      = "512"
+  memory                   = "1024"
   task_role_arn            = "${aws_iam_role.ecs_service.arn}"
   execution_role_arn       = "arn:aws:iam::${data.aws_caller_identity.main.account_id}:role/ecsTaskExecutionRole"
 

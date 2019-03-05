@@ -122,11 +122,12 @@ resource "aws_rds_cluster_parameter_group" "main" {
 # RDS Cluster Instances
 
 resource "aws_rds_cluster_instance" "main" {
-  count              = "${var.db_instance_count}"
-  engine             = "aurora-mysql"
-  identifier         = "${lower(var.prefix)}-${var.aws_region}-${format("%02d", count.index + 1)}"
-  cluster_identifier = "${aws_rds_cluster.main.id}"
-  instance_class     = "db.t3.small"
+  count               = "${var.db_instance_count}"
+  engine              = "aurora-mysql"
+  identifier          = "${lower(var.prefix)}-${var.aws_region}-${format("%02d", count.index + 1)}"
+  cluster_identifier  = "${aws_rds_cluster.main.id}"
+  instance_class      = "db.t3.small"
+  monitoring_interval = "60"
 
   tags {
     Environment = "CMS"
