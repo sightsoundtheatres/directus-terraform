@@ -104,6 +104,10 @@ resource "aws_ecs_service" "main" {
     container_name   = "${var.prefix}-${var.aws_region}-DirectusAPI"
     container_port   = 80
   }
+
+  lifecycle {
+    ignore_changes = ["desired_count"]
+  }
 }
 
 # ECS Task Definitions
@@ -244,7 +248,7 @@ resource "aws_appautoscaling_policy" "down" {
     metric_aggregation_type = "Maximum"
 
     step_adjustment {
-      metric_interval_lower_bound = 0
+      metric_interval_upper_bound = 0
       scaling_adjustment          = -1
     }
   }
