@@ -90,6 +90,22 @@ resource "aws_cloudfront_distribution" "cms" {
     }
   }
 
+  origin_group {
+    origin_id = "OriginGroup-S3-${var.r53_subdomain}.${replace(data.aws_route53_zone.main.name, "/[.]$/", "")}"
+
+    failover_criteria {
+      status_codes = [403, 404, 500, 502, 503, 504]
+    }
+
+    member {
+      origin_id = "S3-${var.r53_subdomain}-us-east-1.${replace(data.aws_route53_zone.main.name, "/[.]$/", "")}"
+    }
+
+    member {
+      origin_id = "S3-${var.r53_subdomain}-us-west-2.${replace(data.aws_route53_zone.main.name, "/[.]$/", "")}"
+    }
+  }
+
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
