@@ -12,5 +12,5 @@ variable "r53_subdomain" {
 
 variable "cors_origins" {
   description = "The origins to allow CDN resources to be loaded from."
-  type = "list"
+  type        = "list"
 }

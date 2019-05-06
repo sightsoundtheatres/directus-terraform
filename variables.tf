@@ -41,5 +41,5 @@ variable "db_password" {
 
 variable "cdn_cors_origins" {
   description = "The origins to allow CDN resources to be loaded from."
-  type = "list"
+  type        = "list"
 }
