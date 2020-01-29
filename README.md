@@ -4,6 +4,8 @@
 
 This repository contains the Terraform modules used by [Sight & Sound Theatres](https://sight-sound.com) to deploy Directus 7 into AWS ECS (Fargate), RDS (Aurora), S3, CloudFront, and Route 53. These modules are configured to deploy into two regions, us-east-1 and us-west-2 by default. More regions may be easily added by modifying `main.tf`.
 
+##### Please note we no longer use Directus at Sight & Sound, which is why this repository is archived, and support will not be provided. You are free to fork this repository and make your own changes, however.
+
 We cannot promise support with these modules, because they are built specifically with our environment in mind, and your environment may differ. However, if you do need help, an issue is the easiest path to getting help. Pull requests are welcome, but may not be accepted in many cases.
 
 ## Deployment
